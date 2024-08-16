@@ -15,9 +15,10 @@ const VideoSection = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 28px;
-  font-weight: 600;
-  color: #2c3e50;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2E7D32;
   margin-bottom: 24px;
   text-align: center;
 `;
@@ -71,7 +72,7 @@ const ViewMoreButton = styled(Link)`
   width: 200px;
   margin: 0 auto;
   padding: 12px 24px;
-  background-color: #3498db;
+  background-color: #4CAF50;
   color: #fff;
   text-align: center;
   text-decoration: none;
@@ -81,7 +82,7 @@ const ViewMoreButton = styled(Link)`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: #4CAF50;
   }
 `;
 

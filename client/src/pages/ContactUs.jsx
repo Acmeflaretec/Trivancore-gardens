@@ -46,9 +46,9 @@ const ContactUs = () => {
                   <div className="contact-info">
                     <h3 className="fw-bold">Contact Details</h3>
                     {/* <p>123 Street Name</p> */}
-                    <p>Cherppulasseri, palakkad 679505</p>
-                    <p>Email: kgecoproductss@gmail.com</p>
-                    <p>Phone: +91 7902832661</p>
+                    <p>trivandrum</p>
+                    <p>Email: example@gmail.com</p>
+                    <p>Phone: +91 123456789</p>
                   </div>
                 </Col>
                 <Col md={6}>

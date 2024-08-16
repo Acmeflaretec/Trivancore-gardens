@@ -97,7 +97,8 @@ useEffect(()=>{
     <nav className="navbar navbar-expand-lg navbar-light middle-nav">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          <img src="logo.png" className="logo" alt="Logo" />
+          {/* <img src="logo.png" className="logo" alt="Logo" /> */}
+          <h5 className="logo-text fw-bold text-success">Travancore gardens</h5>
         </Link>
 
         <div className="nav-actions mobile-action">

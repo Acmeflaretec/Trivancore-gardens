@@ -17,8 +17,8 @@ const WhoAreWe = () => {
             <h2 className="section-title">Who Are We?</h2>
             <div className="green-line"></div>
             <p className="section-text">
-            Eco-friendly solutions are essential for our future as plastic pollution threatens our planet. Our business provides a wide range of eco-products, available online and offline, revolutionizing personal care and daily essentials with sustainable alternatives. By creating a hub for all eco-friendly products, we address challenges like time-consuming choices and the lack of affordable, quality items. Starting in India and expanding across world, our goal is to reduce plastic waste and promote sustainable living globally.
-                        </p>
+            At Travancore Gardens, we’re passionate about helping you create beautiful, sustainable gardens. From vibrant flowers and lush greenery to organic gardening tools, we offer everything you need to cultivate your dream outdoor space. With a commitment to eco-friendly practices and a community of plant lovers, we’re here to support you on your gardening journey. Let’s grow something beautiful together!
+           </p>
          
            <Link to={'/about'}>
                 <motion.button 

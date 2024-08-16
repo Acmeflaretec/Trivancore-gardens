@@ -42,9 +42,9 @@ function Footer() {
           <Col lg={3} md={6} className="footer-section">
             <h5 className="footer-title">Contact Us</h5>
             <ul className="footer-contact">
-              <li><i className="fas fa-phone"></i> +91 7902832661</li>
-              <li><i className="fas fa-envelope"></i> kgecoproductss@gmail.com</li>
-              <li><i className="fas fa-map-marker-alt"></i>Cherppulasseri, palakkad 679505</li>
+              <li><i className="fas fa-phone"></i> +91 123456789</li>
+              <li><i className="fas fa-envelope"></i> example@gmail.com</li>
+              <li><i className="fas fa-map-marker-alt"></i>trivandrum</li>
             </ul>
           </Col>
         </Row>
@@ -53,7 +53,7 @@ function Footer() {
         <Container>
           <Row className="align-items-center">
             <Col md={6} className="text-center text-md-start">
-              <p className="mb-0">&copy; {new Date().getFullYear()} KG ECO. All rights reserved.</p>
+              <p className="mb-0">&copy; {new Date().getFullYear()} Travancore gardens. All rights reserved.</p>
             </Col>
             <Col md={6} className="text-center text-md-end">
               <p className="mb-0">Designed by <a href="https://www.acmeflare.in/" className="designer-link">Acmeflare</a></p>

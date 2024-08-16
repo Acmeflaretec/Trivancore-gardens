@@ -5,19 +5,19 @@ import './WhyChooseUs.css';
 const WhyChooseUs = () => {
   const reasons = [
     {
-      icon: 'leaf',
-      title: 'Eco-Friendly Products',
-      description: 'Our products are designed with the environment in mind, using sustainable materials and eco-friendly practices.',
+      icon: 'handshake',
+      title: 'Expert Guidance',
+      description: 'At Travancore Gardens, we do more than just sell plants—we share our passion and expertise with you. Our knowledgeable team is always ready to provide personalized advice, whether you are a beginner or an experienced gardener. From selecting the right plants to offering care tips, we are here to help your garden thrive.',
     },
     {
-      icon: 'users',
-      title: 'Community Driven',
-      description: 'We are committed to building a community that values sustainability and supports eco-friendly living.',
+      icon: 'leaf',
+      title: ' Eco-Friendly Commitment',
+      description: 'Sustainability is at the core of everything we do. We are dedicated to offering products that are kind to the environment, from organic fertilizers to sustainably sourced plants. By choosing Travancore Gardens, you are not only beautifying your space but also making a positive impact on the planet.',
     },
     {
       icon: 'award',
-      title: 'High Quality',
-      description: 'Our products are made to the highest standards, ensuring you receive durable and reliable items that you can trust.',
+      title: 'Quality You Can Trust',
+      description: 'We take pride in the quality of our products. Every plant, tool, and garden accessory is carefully selected to ensure it meets our high standards. With Travancore Gardens, you can trust that you are getting the best, whether you are purchasing a rare plant or essential gardening supplies.',
     },
   ];
 

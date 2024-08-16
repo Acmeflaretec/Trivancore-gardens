@@ -4,49 +4,52 @@ import MiddleNav from '../../components/MiddleNav';
 
 function TermsOfService() {
   return (
-<>
-<MiddleNav/>
-<div className="container my-5">
-      <div className="row">
-        <div className="col">
-          <h1 className="mb-4">Terms of Service</h1>
-          <b>USER AGREEMENT</b><br/><br/>
+    <>
+      <MiddleNav />
+      <div className="container my-5">
+        <div className="row">
+          <div className="col">
+            <h1 className="mb-4">Terms of Service</h1>
 
-By accessing the KGECO website, the user agrees to the accompanying terms and conditions of this site. Any orders and purchases made through this site are also governed by these terms and conditions. It is at our discretion to alter these website terms and conditions without notice at any time.
-<br/><br/>
-<b>GOVERNING LAWS</b><br/><br/>
+            <h2 className="mt-4"><strong>USER AGREEMENT</strong></h2>
+            <p>
+              By accessing the KGECO website, you agree to the accompanying terms and conditions. Any orders and purchases made through this site are governed by these terms. We reserve the right to modify these terms and conditions without notice at any time.
+            </p>
 
-This website is governed by the laws and the courts of the state of Kerala. Any orders placed on this site and use of this site must follow in accordance with applicable provincial and national law. It is the responsibility of the user to comply with said laws.
-<br/><br/>
-<b>WEBSITE ERRORS</b><br/><br/>
+            <h2 className="mt-4"><strong>GOVERNING LAWS</strong></h2>
+            <p>
+              This website is governed by the laws and courts of the state of Kerala. Orders placed on this site and the use of this site must comply with applicable provincial and national laws. It is the user’s responsibility to adhere to these laws.
+            </p>
 
-It is our prerogative to correct any errors or inaccuracies and change or update information on this website at any time without notice. This includes price and item availability.
-<br/><br/>
-<b>SHIPPING</b><br/><br/>
+            <h2 className="mt-4"><strong>WEBSITE ERRORS</strong></h2>
+            <p>
+              We reserve the right to correct any errors or inaccuracies and update information on this website at any time without notice. This includes price and item availability.
+            </p>
 
-All items will be delivered by a third party and delivery is therefore governed by the third party’s shipping contracts. While all efforts will be made to deliver items as quickly as possible via commercial contracts, we are not responsible for delivery delays beyond our control. We maintain the right to hold shipments to certain addresses or cancel orders at our discretion.
-<br/><br/>
-<b>LINKS</b><br/><br/>
+            <h2 className="mt-4"><strong>SHIPPING</strong></h2>
+            <p>
+              All items are delivered by a third party, and delivery is governed by the third party’s shipping contracts. While we strive to deliver items as quickly as possible, we are not responsible for delivery delays beyond our control. We reserve the right to hold shipments to certain addresses or cancel orders at our discretion.
+            </p>
 
-This site provides links to other websites. All of these linked websites are completely independent of KGECO. We have no control of, and hold no liability for, the content and subsequent use of these aforementioned sites. Any access to websites via web links found on this website are to be utilized at the risk of the user.
-<br/><br/>
-<b>COPYRIGHT CONSIDERATION</b><br/><br/>
+            <h2 className="mt-4"><strong>LINKS</strong></h2>
+            <p>
+              This site may provide links to other websites. These linked websites are independent of KGECO. We have no control over, and hold no liability for, the content or use of these sites. Accessing other websites through links on this site is done at the user’s own risk.
+            </p>
 
-All textual and graphic content on this site, its organization and presentation, and organization and domain name are the property of, and/or licensed by, KGECO. The materials on this site may not be copied, reproduced, posted, or republished in any way. The republication or use of these materials on any other website is prohibited. All copyright logos, and service marks displayed on this site are registered. Use of them is prohibited.
-<br/><br/>
-<b>LIABILITY DISCLAIMER</b><br/><br/>
+            <h2 className="mt-4"><strong>COPYRIGHT CONSIDERATION</strong></h2>
+            <p>
+              All textual and graphic content on this site, its organization, presentation, and domain name are the property of, and/or licensed by, KGECO. Materials on this site may not be copied, reproduced, posted, or republished in any way. Republication or use of these materials on any other website is prohibited. All copyright logos and service marks displayed on this site are registered and their use is prohibited.
+            </p>
 
-This website should be accessed and used with discretion. Although reasonable efforts have been made to ensure the website is current and contains no inaccuracies or errors, we cannot guarantee these will not occur. When a mistake is noticed, we will correct it as soon as possible and make reasonable efforts to notify affected users. This could mean that orders not yet shipped may be cancelled or postponed. This agreement between KGECO. and the user supersedes any and all prior agreements and understandings pertaining to this subject matter. We are not responsible for lost, incomplete, illegible, misdirected or stolen messages/ mail, unavailable connections, failed, incomplete, garbled, or delayed transmissions, online failures, hardware, software, or other technical malfunctions or disturbances, whether these circumstances affect, disrupt, or corrupt communications or not.
-
-KGECO, owners and employees are not liable for any damages arising out of, or related to use of or access to, our site or linked sites, whether these damages are foreseeable or not and whether or not we have been advised of the possibility, including, without limitation, direct, indirect, special, consequential, incidental or punitive damaged.
+            <h2 className="mt-4"><strong>LIABILITY DISCLAIMER</strong></h2>
+            <p>
+              This website should be used with discretion. Although we make reasonable efforts to ensure the website is current and free from inaccuracies or errors, we cannot guarantee that these will not occur. We will correct any mistakes as soon as possible and make reasonable efforts to notify affected users. This may result in orders not yet shipped being canceled or postponed. This agreement supersedes any prior agreements or understandings related to this subject matter. KGECO and its owners and employees are not liable for any damages arising from the use or access to our site or linked sites, whether these damages are foreseeable or not and regardless of whether we have been advised of the possibility, including, but not limited to, direct, indirect, special, consequential, incidental, or punitive damages.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-
-<Footer/>
-</>
-
-   
+      <Footer />
+    </>
   );
 }
 

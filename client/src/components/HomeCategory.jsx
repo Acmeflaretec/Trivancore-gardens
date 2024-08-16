@@ -19,9 +19,10 @@ const CategorySection = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 28px;
-  font-weight: 600;
-  color: #2c3e50;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2E7D32;
   margin-bottom: 24px;
   text-align: center;
 `;
