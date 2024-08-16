@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../axios";
-import { FaRegTrashAlt, FaLock, FaPlus,FaMinus } from "react-icons/fa";
+import { FaRegTrashAlt, FaLock, FaPlus, FaMinus } from "react-icons/fa";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Modal, Button, Form } from "react-bootstrap";
 import logoPng from "../assets/images/logo.png";
 import LoadingScreen from "../components/loading/LoadingScreen";
+import axios from 'axios';
 
 
 const Checkout = () => {
@@ -18,18 +19,64 @@ const Checkout = () => {
   );
   const [paymentOption, setPaymentOption] = useState("razorpay");
   const [cartData, setCartData] = useState([]);
-  const [filteredCartData,setFilteredCartData] = useState([])
+  const [filteredCartData, setFilteredCartData] = useState([])
 
   const [salePriceTotal, setSalePriceTotal] = useState(0);
   const [proPriceTotal, setProPriceTotal] = useState(0);
   const [discountTotal, setDiscountTotal] = useState(0);
-  const deliveryCharge = 30;
+  // const deliveryCharge = 30;
 
   const [addressDatas, setAddressDatas] = useState([]);
   const [orderAddress, setOrderAddress] = useState({});
 
   const [loadingIndex, setLoadingIndex] = useState(null);
-  const [loadScreenState, setLoadScreenState] = useState(true); // Loading state
+  const [loadScreenState, setLoadScreenState] = useState(true);
+
+
+  const [selectedAddressPin, setSelectedAddressPin] = useState();
+  const [state, setState] = useState('');
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const [totalquantity, settotalquantity] = useState(0);
+
+  useEffect(() => {
+    const findTheState = async () => {
+      try {
+        const response = await axios.get(`https://api.postalpincode.in/pincode/${selectedAddressPin}`);
+        // console.log('state responce', response?.data[0]?.PostOffice[0].State);
+
+        const stateFromApi = response?.data[0]?.PostOffice[0]?.State; 
+        setState(stateFromApi);
+      } catch (error) {
+        console.error('Error fetching state:', error);
+      }
+    };
+    if (selectedAddressPin) {
+      findTheState();
+    }
+
+  }, [selectedAddressPin]);
+
+  useEffect(() => {
+    const calculateDeliveryCharge = () => {
+      if (!state) return;
+
+      let baseCharge;
+      if (state.toLowerCase() === 'kerala') {
+        baseCharge = 80;
+      } else {
+        baseCharge = 100;
+      }
+
+      let extraCharge = 0;
+      if (totalquantity > 4) {
+        extraCharge = Math.ceil((totalquantity - 4) / 2) * 20;
+      }
+
+      setDeliveryCharge(baseCharge + extraCharge);
+    };
+
+    calculateDeliveryCharge();
+  }, [state, totalquantity]);
 
   const fetchAddress = async (urlQ) => {
     try {
@@ -49,6 +96,9 @@ const Checkout = () => {
   useEffect(() => {
     fetchAddress("/address");
   }, []);
+  useEffect(() => {
+    setSelectedAddressPin(orderAddress.zip)
+  }, [orderAddress]);
 
   //
 
@@ -72,6 +122,16 @@ const Checkout = () => {
 
     return totalSalePrice;
   };
+  const calculateTotalquantity = (items) => {
+    let totalSaleQuantity = 0;
+
+    items.forEach((item) => {
+      // Add the sale_rate to the totalSalePrice
+      totalSaleQuantity += item.qty;
+    });
+
+    return totalSaleQuantity;
+  };
   const calculateTotalDiscountPrice = (items) => {
     let totalSalePrice = 0;
 
@@ -90,12 +150,12 @@ const Checkout = () => {
 
       const items = response?.data?.data?.item;
 
-      const filteredItems = items.filter((obj)=>{
+      const filteredItems = items.filter((obj) => {
 
-        return obj.productId.isAvailable !=false
-  
+        return obj.productId.isAvailable != false
+
       })
-      
+
       setFilteredCartData(filteredItems)
 
       // Calculate the total sale price
@@ -107,6 +167,10 @@ const Checkout = () => {
       const totalProPrice = calculateTotalProPrice(filteredItems);
       //console.log(totalProPrice)
       setProPriceTotal(totalProPrice);
+
+      const totalProQuantity = calculateTotalquantity(filteredItems);
+      console.log(totalProQuantity)
+      settotalquantity(totalProQuantity);
 
       // Calculate the total discount
       const totalDiscount = calculateTotalDiscountPrice(filteredItems);
@@ -125,7 +189,7 @@ const Checkout = () => {
 
   const handleRemoveItem = async (itemId) => {
     let urlQuery = `/user/removeFromCart/${itemId}`;
-  
+
     try {
       const response = await axiosInstance.patch(urlQuery);
       const updatedFilteredCartItems = filteredCartData.filter(
@@ -135,17 +199,23 @@ const Checkout = () => {
         (acc, item) => acc + item.productId.price * item.qty,
         0
       );
-  
+
       setFilteredCartData(updatedFilteredCartItems);
-  
+
       // Calculate the total sale price
       const totalSalePrice = calculateTotalSalePrice(updatedFilteredCartItems);
       setSalePriceTotal(totalSalePrice);
-  
+      
+      // const totalupdateQuantity = calculateTotalSalePrice(updatedFilteredCartItems);
+      // setSalePriceTotal(totalupdateQuantity);
+      const totalProQuantity = calculateTotalquantity(updatedFilteredCartItems);
+      console.log(totalProQuantity)
+      settotalquantity(totalProQuantity);
+
       // Calculate the total  price
       const totalProPrice = calculateTotalProPrice(updatedFilteredCartItems);
       setProPriceTotal(totalProPrice);
-  
+
       if (updatedFilteredCartItems?.length === 0) {
         navigate("/");
       }
@@ -153,7 +223,7 @@ const Checkout = () => {
       console.error("Error removing item from wishlist:", error);
     }
   };
-  
+
   // const handleRemoveItem = async (itemId) => {
   //   let urlQuery = `/user/removeFromCart/${itemId}`;
 
@@ -175,7 +245,7 @@ const Checkout = () => {
   //     const filteredItems = updatedCartItems.filter((obj)=>{
 
   //       return obj.productId.isAvailable !=false
-  
+
   //     })
 
   //     // Calculate the total sale price
@@ -241,14 +311,14 @@ const Checkout = () => {
     // } else if (operation === "decrement") {
     //   QtyApi -= 1;
     // }
-  
+
     // Optimistically update the UI
     const updatedFilteredCartData = [...filteredCartData];
     updatedFilteredCartData[index].qty = QtyApi;
     setFilteredCartData(updatedFilteredCartData);
-  
+
     setLoadingIndex(index); // Set loading state
-  
+
     try {
       if (
         item?.qty <= item?.productId?.stock &&
@@ -259,14 +329,14 @@ const Checkout = () => {
           qty: QtyApi,
           productId: item?.productId._id,
         });
-      
+
       } else if (item?.qty > 1 && operation === "decrement") {
         QtyApi -= 1;
         const response = await axiosInstance.patch("/user/updateQty", {
           qty: QtyApi,
           productId: item?.productId._id,
         });
-       
+
       }
     } catch (error) {
       // Revert the state change if the API call fails
@@ -279,7 +349,7 @@ const Checkout = () => {
       await fetchData();
     }
   };
-  
+
 
   React.useEffect(() => {
     const script = document.createElement("script");
@@ -333,9 +403,10 @@ const Checkout = () => {
 
   const placeOrder = async () => {
 
-    const totalAmountToPay = salePriceTotal < 299 
-    ? salePriceTotal + deliveryCharge 
-    : salePriceTotal;
+    // const totalAmountToPay = salePriceTotal < 299
+    //   ? salePriceTotal + deliveryCharge
+    //   : salePriceTotal;
+    const totalAmountToPay =  salePriceTotal + deliveryCharge
 
     if (paymentOption === "cod") {
       handlePaymentSuccess();
@@ -409,6 +480,7 @@ const Checkout = () => {
       setAddressDatas([]);
 
       await fetchAddress("/address");
+      
     } catch (error) {
       console.error("Error submitting address: ", error);
     }
@@ -417,10 +489,20 @@ const Checkout = () => {
   // static
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [showAddressModal, setShowAddressModal] = useState(false);
- 
-  
-  
 
+  const handileDaliweryCharge = () => {
+    // setSelectedAddressPin(orderAddress.zip)
+    if(state){
+
+      setCurrentStep(2);
+    }else{
+      alert('this location product not deliverd. please add another pincode')
+    }
+  }
+
+  
+  console.log('delivery charge is:-',deliveryCharge);
+  
   return (
     <>
       {loadScreenState ? (
@@ -472,11 +554,10 @@ const Checkout = () => {
                           {addressDatas.map((address) => (
                             <div key={address._id} className="col-md-6">
                               <div
-                                className={`border rounded p-3 h-100 ${
-                                  selectedAddress === address
-                                    ? "border-success"
-                                    : ""
-                                }`}
+                                className={`border rounded p-3 h-100 ${selectedAddress === address
+                                  ? "border-success"
+                                  : ""
+                                  }`}
                               >
                                 <p className="mb-1">
                                   <strong>
@@ -490,13 +571,13 @@ const Checkout = () => {
                                   {address.pincode}
                                 </p>
                                 <p className="mb-1">{address.country}</p>
+                                <p className="mb-1">{address.zip}</p>
                                 <p className="mb-3">Phone: {address.mobile}</p>
                                 <button
-                                  className={`btn ${
-                                    orderAddress === address
-                                      ? "btn-success"
-                                      : "btn-outline-success"
-                                  } w-100`}
+                                  className={`btn ${orderAddress === address
+                                    ? "btn-success"
+                                    : "btn-outline-success"
+                                    } w-100`}
                                   onClick={() => setOrderAddress(address)}
                                 >
                                   {orderAddress === address
@@ -526,7 +607,8 @@ const Checkout = () => {
                             //  onClick={() => setCurrentStep(2)}
                             onClick={() => {
                               window.scrollTo(0, 0);
-                              setCurrentStep(2);
+                              handileDaliweryCharge()
+                              // setCurrentStep(2);
                             }}
                           >
                             Continue to Review
@@ -550,9 +632,8 @@ const Checkout = () => {
                         >
                           <div className="col-md-3">
                             <img
-                              src={`${
-                                import.meta.env.VITE_API_BASE_URL_LOCALHOST
-                              }/uploads/${product?.productId?.image[0]}`}
+                              src={`${import.meta.env.VITE_API_BASE_URL_LOCALHOST
+                                }/uploads/${product?.productId?.image[0]}`}
                               alt={product?.name}
                               className="img-fluid rounded"
                             />
@@ -589,7 +670,7 @@ const Checkout = () => {
                                   product?.qty === 1 || loadingIndex === index
                                 }
                               >
-                                    {loadingIndex === index ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <FaMinus />}
+                                {loadingIndex === index ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <FaMinus />}
 
                               </button>
                               <input
@@ -610,7 +691,7 @@ const Checkout = () => {
                                 }
                                 disabled={loadingIndex === index}
                               >
-                              {loadingIndex === index ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <FaPlus />}
+                                {loadingIndex === index ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <FaPlus />}
                               </button>
                             </div>
 
@@ -735,31 +816,33 @@ const Checkout = () => {
                       <span>Subtotal:</span>
                       <span>₹{proPriceTotal}</span>
                     </div>
+                    
+                    <div className="d-flex justify-content-between mb-2">
+                      <span>Total Discount:</span>
+                      <span>-₹{proPriceTotal - salePriceTotal}</span>
+                    </div>
                     <div className="d-flex justify-content-between mb-2">
                       <span>Delivery Fee:</span>
-                      {salePriceTotal > 299 ? (
-                       <span>
+                      {/* {salePriceTotal > 299 ? (
+                        <span>
                           <span className="text-decoration-line-through">
                             ₹{deliveryCharge}{" "}
                           </span>
                           <span className="text-success ms-2"> Free Delivery</span>
-                       </span>
-                      ) : (
+                        </span>
+                      ) : ( */}
                         <span>₹{deliveryCharge}</span>
-                      )}
-                    </div>
-                    <div className="d-flex justify-content-between mb-2">
-                      <span>Total Discount:</span>
-                      <span>-₹{proPriceTotal - salePriceTotal}</span>
+                      {/* )} */}
                     </div>
                     <hr />
                     <div className="d-flex justify-content-between fw-bold">
                       <span>Total:</span>
                       <span>
                         ₹
-                        {salePriceTotal < 299
-                          ? salePriceTotal + deliveryCharge
-                          : salePriceTotal}
+                        {/* {salePriceTotal < 299
+                          ?  */}
+                          {salePriceTotal + deliveryCharge}
+                          {/* : salePriceTotal} */}
                       </span>
                     </div>
                   </div>
