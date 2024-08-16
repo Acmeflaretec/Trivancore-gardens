@@ -7,7 +7,7 @@ import Blogs from "pages/Blogs";
 import Videos from "pages/Video";
 import Settings from "pages/Settings";
 import Billing from "layouts/billing";
-import Profile from "layouts/profile";
+import Profile from "layouts/profile";   
 import Box from "components/Box";
 
 const routes = [
