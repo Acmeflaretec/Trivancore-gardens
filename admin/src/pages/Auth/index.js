@@ -31,7 +31,7 @@ const Login = () => {
             title="Sign In"
             description="Enter your email and password to sign in"
             illustration={{
-                title: "KGECO",
+                title: "Travancore gardens",
                 description:
                     "Admin Management Console",
                 image
