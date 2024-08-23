@@ -1,13 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
-
-const videos = [
-  { id: '1', videoId: 'dQw4w9WgXcQ', title: 'Video 1' },
-  { id: '2', videoId: 'ZXsQAXx_ao0', title: 'Video 2' },
-  { id: '3', videoId: 'M7lc1UVf-VE', title: 'Video 3' },
-  // Add more videos as needed
-];
+import { Link } from 'react-router-dom';
+import axiosInstance from '../axios'
 
 const VideoSection = styled.section`
   padding: 40px 20px;
@@ -20,7 +14,6 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   color: #2E7D32;
   margin-bottom: 24px;
-  text-align: center;
 `;
 
 const VideoGrid = styled.div`
@@ -44,7 +37,7 @@ const VideoCard = styled.div`
 
 const VideoWrapper = styled.div`
   position: relative;
-  padding-bottom: 56.25%; // 16:9 aspect ratio
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
 `;
@@ -87,16 +80,30 @@ const ViewMoreButton = styled(Link)`
 `;
 
 function HomeVideos() {
-  return (
+  const [videos, setVideos] = useState([]);
 
+  useEffect(() => {
+    const fetchVideos = async () => {
+      await axiosInstance.get('/videos/clientFetching?limit=3&status=true')
+        .then(response => {
+          setVideos(response.data.videos);
+        })
+        .catch(error => {
+          console.error('Error fetching videos:', error);
+        });
+    }
+    fetchVideos()
+  }, []);
+
+  return (
     <VideoSection>
       <SectionTitle>Featured Videos</SectionTitle>
       <VideoGrid>
         {videos.map((video) => (
-          <VideoCard key={video.id}>
+          <VideoCard key={video._id}>
             <VideoWrapper>
               <VideoIframe
-                src={`https://www.youtube.com/embed/${video.videoId}`}
+                src={`https://www.youtube.com/embed/${video.url}`}
                 title={video.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -108,7 +115,6 @@ function HomeVideos() {
       </VideoGrid>
       <ViewMoreButton to="/allvideos">View More Videos</ViewMoreButton>
     </VideoSection>
-    
   );
 }
 

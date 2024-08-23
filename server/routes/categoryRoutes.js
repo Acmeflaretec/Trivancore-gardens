@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const router = Router();
 const authorization = require("../middlewares/authorization");
-const { getCategory, addCategory, deleteCategory ,updateCategory,getCategoryById} = require('../controllers/categoryController');
+const { getCategory, addCategory, deleteCategory ,updateCategory,getCategoryById,getClientCategory} = require('../controllers/categoryController');
 const { upload } = require('../middlewares/multer');
 
-router.get('/', getCategory);
+router.get('/', getCategory);    
+router.get('/clientCategory', getClientCategory);
 router.get('/:id', getCategoryById);
 router.post("/",upload.single('image'), addCategory);
 // router.post("/", authorization, upload.single('image'), addCategory);

@@ -38,7 +38,7 @@ const TableData = () => {
     Videos: <Videos  name={item?.title} desc={item?.subtitle} />,
     url: (
       <Typography variant="caption" color="secondary" fontWeight="medium">
-        <a href={item?.url}>{item?.url}</a>
+        <a href={item?.url}>{item?.url?.slice(0,30)}</a>
       </Typography>
     ),
     status: (

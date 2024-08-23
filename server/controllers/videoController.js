@@ -72,10 +72,53 @@ const deleteVideo = async (req, res) => {
   }
 };
 
+const getClientSideVideos = async (req, res) => {
+  // try {
+  //   const { limit, page, status } = req.query;
+  //   const query = {};
+
+  //   if (status) {
+  //     query.status = status === 'true';
+  //   }
+
+  //   const videos = await Video.find(query)
+  //     .sort({ createdAt: -1 }) 
+  //     .limit(limit ? parseInt(limit) : 0) 
+  //     .skip(page ? (parseInt(page) - 1) * parseInt(limit) : 0); 
+
+  //   res.status(200).json({ videos });
+  // } catch (error) {
+  //   console.log(error);
+  //   return res.status(500).json({ message: error?.message ?? 'Something went wrong' });
+  // }
+
+
+  try {
+    const { limit, page, status } = req.query;
+    const query = {};
+
+    if (status) {
+      query.status = status === 'true';
+    }
+
+    const total = await Video.countDocuments(query);
+    const videos = await Video.find(query)
+      .sort({ createdAt: -1 }) // Sort by latest
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit));
+
+    res.status(200).json({ videos, total });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error?.message ?? 'Something went wrong' });
+  }
+};
+
 module.exports = {
   getVideos,
   addVideo,
   getVideoById,
   updateVideo,
-  deleteVideo
+  deleteVideo,
+  getClientSideVideos
 }

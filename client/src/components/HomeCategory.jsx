@@ -1,17 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-const categories = [
-  { id: 1, name: 'Electronics', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 2, name: 'Fashion', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 3, name: 'Home & Kitchen', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 4, name: 'Books', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 5, name: 'Toys & Games', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 6, name: 'Beauty', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 7, name: 'Sports', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  { id: 8, name: 'Automotive', image: 'https://img.freepik.com/premium-vector/2000-x-2000_1074119-2876.jpg?w=740' },
-  // Add more categories as needed
-];
+import axiosInstance from '../axios';
+import { useNavigate } from 'react-router-dom';
 
 const CategorySection = styled.section`
   padding: 50px 20px;
@@ -24,7 +14,6 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   color: #2E7D32;
   margin-bottom: 24px;
-  text-align: center;
 `;
 
 const CategoryScrollContainer = styled.div`
@@ -79,7 +68,7 @@ const ScrollButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(100, 100, 100, 0.7); /* Changed to a light gray color */
+  background-color: rgba(100, 100, 100, 0.7); 
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -92,7 +81,7 @@ const ScrollButton = styled.button`
   z-index: 1;
 
   &:hover {
-    background-color: rgba(100, 100, 100, 0.9); /* Slightly darker on hover */
+    background-color: rgba(100, 100, 100, 0.9); 
   }
 
   &.left {
@@ -108,15 +97,35 @@ const ScrollButton = styled.button`
   }
 `;
 
-
 function HomeCategory() {
+  const [categories, setCategories] = useState([]);
   const scrollRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axiosInstance.get('/category/clientCategory');
+        setCategories(response.data.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
       const scrollAmount = direction === 'left' ? -200 : 200;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
+  };
+
+  // const handleCategoryClick = (categoryId) => {    
+  //   navigate(`/products?category=${categoryId}`);
+  // };
+  const handleCategoryClick = (category) => {
+    navigate(`/allproducts?category=${category._id}`);
   };
 
   return (
@@ -126,10 +135,10 @@ function HomeCategory() {
         <ScrollButton className="left" onClick={() => scroll('left')}>
           ‹
         </ScrollButton>
-        <CategoryScroll ref={scrollRef}>
+        <CategoryScroll ref={scrollRef} style={{display:'flex',justifyContent:'center'}}>
           {categories.map((category) => (
-            <CategoryCard key={category.id}>
-              <CategoryImage src={category.image} alt={category.name} />
+            <CategoryCard key={category._id} onClick={() => handleCategoryClick(category)}>
+              <CategoryImage src={`${import.meta.env.VITE_API_BASE_URL_LOCALHOST}/uploads/${category.image}`} alt={category.name} />
               <CategoryName>{category.name}</CategoryName>
             </CategoryCard>
           ))}
