@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const Product = require('../models/product');   
 const Category = require('../models/category')
 const fs = require('fs');
 
@@ -6,6 +6,8 @@ const getProducts = async (req, res) => {
   try {
     const { page = 1, limit, sortField, sortOrder, search, category,
       priceGreaterThan, priceLessThan, priceMin, priceMax, sortDiscount, sortDiscountGreaterThan } = req.query;
+      console.log('all product quary', category);   
+      
 
     // Convert page and limit to integers
     const pageNumber = parseInt(page, 10) || 1;
@@ -52,7 +54,7 @@ const getProducts = async (req, res) => {
     if (priceMin && priceMax) {
       query.sale_rate = { $gte: parseInt(priceMin), $lte: parseInt(priceMax) };
     }
-
+      
     if (sortDiscount) {
       query.discount = parseInt(sortDiscount);
     }
@@ -76,6 +78,35 @@ const getProducts = async (req, res) => {
     res.status(400).json({ message: error?.message ?? "Something went wrong !" });
   }
 };
+
+// const getProducts = async (req, res) => {
+//   try {
+//     const { 
+//       page = 1, 
+//       limit = 10, 
+      
+//       category,
+       
+//     } = req.query;
+
+//     console.log('All product query:', category);   
+//     const pageNumber = parseInt(page, 10) || 1;
+//     const limitNumber = parseInt(limit, 10) || 10;
+//     const query = { isAvailable: true };
+
+//     if (category) {
+//       query.category = category;  
+//     }
+//     const products = await Product.find(query)
+//       .skip((pageNumber - 1) * limitNumber)
+//       .limit(limitNumber);
+//     res.status(200).json({ data: products });
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//     res.status(400).json({ message: error.message || "Something went wrong!" });
+//   }
+// };
+
 
 const getProductsAdmin = async (req, res) => {
   try {

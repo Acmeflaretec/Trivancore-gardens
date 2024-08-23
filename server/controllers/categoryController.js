@@ -1,9 +1,17 @@
 const Category = require('../models/category')
-// const fs = require('fs');
+const fs = require('fs');
 
 const getCategory = async (req, res) => {
   try {
     const data = await Category.find()
+    res.status(200).json({ data })
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getClientCategory = async (req, res) => {
+  try {
+    const data = await Category.find({isAvailable:true})
     res.status(200).json({ data })
   } catch (error) {
     console.log(error);
@@ -97,6 +105,7 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
     getCategory,
+    getClientCategory,
     addCategory,
     deleteCategory,
     updateCategory,

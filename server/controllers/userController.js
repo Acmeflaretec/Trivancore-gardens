@@ -44,7 +44,7 @@ const updateUser = async (req, res) => {
       { new: true, runValidators: true } // Options to return the updated document and run validators
     );
 
-  return  res.status(200).json({ data: updatedUser, message: 'User updated successfully' });
+    return res.status(200).json({ data: updatedUser, message: 'User updated successfully' });
   } catch (error) {
     return res.status(500).json({ message: error.message ?? 'Something went wrong' });
   }
@@ -54,10 +54,10 @@ const updateUser = async (req, res) => {
 const updateQty = async (req, res) => {
   try {
     const { _id } = req?.decoded
-  //  const _id = '66796d0936bb97720a7764f4'
+    //  const _id = '66796d0936bb97720a7764f4'
     const { qty, productId } = req?.body
     const userData = await User.findById({ _id })
-    await userData.updateCart( productId, qty )
+    await userData.updateCart(productId, qty)
     res.status(201).json({ message: 'Quantity updated to cart' });
   } catch (error) {
     console.log(error);
@@ -67,12 +67,12 @@ const updateQty = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-     const { _id } = req?.decoded
+    const { _id } = req?.decoded
     //const _id = '66796d0936bb97720a7764f4'
 
     const productId = req?.params?.id
-    const userData =await User.findById({ _id })
-    const productData =await Product.findById({ _id:productId })
+    const userData = await User.findById({ _id })
+    const productData = await Product.findById({ _id: productId })
     userData.addToCart(productData)
     res.status(201).json({ message: 'Product added to cart' });
   } catch (error) {
@@ -83,9 +83,9 @@ const addToCart = async (req, res) => {
 
 const removeFromCart = async (req, res) => {
   try {
-   const { _id } = req?.decoded
+    const { _id } = req?.decoded
     // const _id = '66796d0936bb97720a7764f4'
-    const productId = req?.params?.id 
+    const productId = req?.params?.id
     const userData = await User.findById({ _id })
     userData.removefromCart(productId)
     res.status(201).json({ message: 'Product removed from cart' });
@@ -98,11 +98,11 @@ const removeFromCart = async (req, res) => {
 const addToWishlist = async (req, res) => {
   try {
     const { _id } = req?.decoded
-  // const id = '66796d0936bb97720a7764f4'
+    // const id = '66796d0936bb97720a7764f4'
 
     const productId = req?.params?.id
-    const userData = await User.findById({_id})
-    const productData = await Product.findById({ _id:productId })
+    const userData = await User.findById({ _id })
+    const productData = await Product.findById({ _id: productId })
     userData.addToWishlist(productId)
     res.status(201).json({ message: 'Product added to wishlist' });
   } catch (error) {
@@ -114,7 +114,7 @@ const addToWishlist = async (req, res) => {
 const removeFromWishlist = async (req, res) => {
   try {
     const { _id } = req?.decoded
-   // const _id = '66796d0936bb97720a7764f4'
+    // const _id = '66796d0936bb97720a7764f4'
     const productId = req?.params?.id
     const userData = await User.findById({ _id })
     console.log('object,')
@@ -127,28 +127,28 @@ const removeFromWishlist = async (req, res) => {
 }
 
 const getWishLists = async (req, res) => {
-   const { _id } = req?.decoded
-   if (_id) {
+  const { _id } = req?.decoded
+  if (_id) {
 
     try {
       const userWishlist = await User.getWishlistWithProductsByUserId(_id);
-      
+
       if (userWishlist) {
-          res.status(200).json({ data: userWishlist });
+        res.status(200).json({ data: userWishlist });
       } else {
-          res.status(404).json({ data:[] });
+        res.status(404).json({ data: [] });
       }
-  } catch (error) {
-    console.log('wish err,', error)
+    } catch (error) {
+      console.log('wish err,', error)
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
-  }
+    }
 
-   }else{
+  } else {
 
     return res.status(404).json({ data: [] });
 
-   }
+  }
 
 
 };
@@ -161,16 +161,16 @@ const getCartDetailsByUserId = async (req, res) => {
       const cart = await User.getCartWithProductsByUserId(_id);
 
       if (cart) {
-          return res.status(200).json({ data:cart });
+        return res.status(200).json({ data: cart });
       } else {
-          return res.status(404).json({data:[] });
+        return res.status(404).json({ data: [] });
       }
-  } catch (error) {
+    } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal server error" });
-  }
+    }
 
-  }else{
+  } else {
 
     return res.status(404).json({ data: [] });
   }
@@ -178,35 +178,35 @@ const getCartDetailsByUserId = async (req, res) => {
 
 }
 
-const checkEmail =async(req,res)=>{
-const email = req?.body.email
-try {
-  
-  const data = await User.findOne({email})
-  if (data) {
-    return res.status(200).json({ message: "Success" });
-  } else {
-    return res.status(404).json({ message: "Use different email" });
-  }
-} catch (error) {
-  
-}
-}
-
-const checkRegisterEmail =async(req,res)=>{
+const checkEmail = async (req, res) => {
   const email = req?.body.email
   try {
-    
-    const data = await User.findOne({email})
+
+    const data = await User.findOne({ email })
+    if (data) {
+      return res.status(200).json({ message: "Success" });
+    } else {
+      return res.status(404).json({ message: "Use different email" });
+    }
+  } catch (error) {
+
+  }
+}
+
+const checkRegisterEmail = async (req, res) => {
+  const email = req?.body.email
+  try {
+
+    const data = await User.findOne({ email })
     if (!data) {
       return res.status(200).json({ message: "Success" });
     } else {
       return res.status(404).json({ message: "Already exists use different email" });
     }
   } catch (error) {
-    
+
   }
-  }
+}
 
 
 const sendRegistrationOtp = async (req, res) => {
@@ -255,6 +255,7 @@ const sendRegistrationOtp = async (req, res) => {
 
 
 const sendOtp = async (req, res) => {
+  
   const email = req?.body?.email;
   const otp = generateOTP();
 
@@ -333,22 +334,23 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+
 module.exports = {
-    getUser,
-    getUsers,
-    updateQty,
-    addToCart,
-    removeFromCart,
-    addToWishlist,
-    removeFromWishlist,
-    getWishLists,
-    getCartDetailsByUserId,
-    updateUser,
-    checkEmail,
-    sendOtp,
-    compareOtp,
-    sendRegistrationOtp,
-    checkRegisterEmail,
+  getUser,
+  getUsers,
+  updateQty,
+  addToCart,
+  removeFromCart,
+  addToWishlist,
+  removeFromWishlist,
+  getWishLists,
+  getCartDetailsByUserId,
+  updateUser,
+  checkEmail,
+  sendOtp,
+  compareOtp,
+  sendRegistrationOtp,
+  checkRegisterEmail,
 
 
-  }
+}

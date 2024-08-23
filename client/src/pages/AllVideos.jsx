@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Pagination from '@mui/material/Pagination';
 import MiddleNav from '../components/MiddleNav';
 import Footer from '../components/Footer';
-import styled from 'styled-components';
+import axiosInstance from '../axios';
 
 const VideoGrid = styled.div`
   display: flex;
@@ -58,26 +60,38 @@ const VideoTitle = styled.div`
 
 function AllVideos() {
   const [videos, setVideos] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    // Fetch videos from your API or data source
-    // This is a placeholder for demonstration
-    setVideos([
-      { id: 1, title: 'Video 1', youtubeId: 'dQw4w9WgXcQ' }, // Replace with actual YouTube video ID
-      { id: 2, title: 'Video 2', youtubeId: 'eYq7WapuDLU' },
-      // Add more videos here
-    ]);
-  }, []);
+    const fetchVideos = async () => {
+      try {
+        const response = await axiosInstance.get(`/videos/clientFetching?page=${page}&limit=9&status=true`);
+        setVideos(response.data.videos);
+
+        // Correctly calculate total pages based on the total number of videos
+        const totalVideos = response.data.total;
+        setTotalPages(Math.ceil(totalVideos / 9)); // Assuming 9 videos per page
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    };
+    fetchVideos();
+  }, [page]);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   return (
     <>
       <MiddleNav />
       <VideoGrid>
         {videos.map((video) => (
-          <VideoCard key={video.id}>
+          <VideoCard key={video._id}>
             <VideoWrapper>
-              <Iframe 
-                src={`https://www.youtube.com/embed/${video.youtubeId}`} 
+              <Iframe
+                src={`https://www.youtube.com/embed/${video.url}`}
                 title={video.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -87,6 +101,13 @@ function AllVideos() {
           </VideoCard>
         ))}
       </VideoGrid>
+      <Pagination
+        count={totalPages}
+        page={page}
+        onChange={handlePageChange}
+        color="primary"
+        style={{ margin: '20px auto', display: 'flex', justifyContent: 'center' }}
+      />
       <Footer />
     </>
   );
