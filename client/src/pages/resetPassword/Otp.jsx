@@ -162,12 +162,14 @@ function Otp() {
             }}
           >
             <Link to="/" style={{ textDecoration: "none" }}>
-              <Image
+              {/* <Image
                 src="logo.png"
                 fluid
                 alt="Logo"
                 style={{ maxWidth: "120px" }}
-              />
+              /> */}
+<h5 className="logo-text fw-bold text-success">Travancore gardens</h5>
+
             </Link>
             <div style={{ color: "#28a745", display: "flex", alignItems: "center" }}>
               <FaLock style={{ marginRight: "0.5rem" }} />
