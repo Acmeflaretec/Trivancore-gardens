@@ -97,7 +97,7 @@ const Checkout = () => {
     fetchAddress("/address");
   }, []);
   useEffect(() => {
-    setSelectedAddressPin(orderAddress.zip)
+    setSelectedAddressPin(orderAddress?.zip)
   }, [orderAddress]);
 
   //
@@ -107,7 +107,7 @@ const Checkout = () => {
 
     items.forEach((item) => {
       // Add the sale_rate to the totalSalePrice
-      totalSalePrice += item.productId.sale_rate * item.qty;
+      totalSalePrice += item?.productId?.sale_rate * item.qty;
     });
 
     return totalSalePrice;
@@ -117,7 +117,7 @@ const Checkout = () => {
 
     items.forEach((item) => {
       // Add the sale_rate to the totalSalePrice
-      totalSalePrice += item.productId.price * item.qty;
+      totalSalePrice += item?.productId?.price * item.qty;
     });
 
     return totalSalePrice;
@@ -137,7 +137,7 @@ const Checkout = () => {
 
     items.forEach((item) => {
       // Add the sale_rate to the totalSalePrice
-      totalSalePrice += item.productId.discount;
+      totalSalePrice += item?.productId?.discount;
     });
 
     return totalSalePrice;
@@ -152,7 +152,7 @@ const Checkout = () => {
 
       const filteredItems = items.filter((obj) => {
 
-        return obj.productId.isAvailable != false
+        return obj?.productId?.isAvailable != false
 
       })
 
@@ -169,7 +169,7 @@ const Checkout = () => {
       setProPriceTotal(totalProPrice);
 
       const totalProQuantity = calculateTotalquantity(filteredItems);
-      console.log(totalProQuantity)
+      // console.log(totalProQuantity)
       settotalquantity(totalProQuantity);
 
       // Calculate the total discount
@@ -365,14 +365,14 @@ const Checkout = () => {
     const orderFormat = {};
 
     const mappedCartItems = await filteredCartData?.map((item) => ({
-      product_id: item.productId._id,
-      qty: item.qty,
-      price: item.productId.sale_rate,
+      product_id: item?.productId?._id,
+      qty: item?.qty,
+      price: item?.productId?.sale_rate,
     }));
 
     // Calculate the total price based on the cart items
     const totalPrice = mappedCartItems.reduce(
-      (total, item) => total + item.qty * item.price,
+      (total, item) => total + item?.qty * item?.price,
       0
     );
 
@@ -571,7 +571,7 @@ const Checkout = () => {
                                   {address.pincode}
                                 </p>
                                 <p className="mb-1">{address.country}</p>
-                                <p className="mb-1">{address.zip}</p>
+                                <p className="mb-1">{address?.zip}</p>
                                 <p className="mb-3">Phone: {address.mobile}</p>
                                 <button
                                   className={`btn ${orderAddress === address
@@ -958,7 +958,7 @@ const Checkout = () => {
                   <Form.Control
                     type="text"
                     name="zip"
-                    value={formData.zip}
+                    value={formData?.zip}
                     onChange={handleChangeAddressCheckout}
                     required
                   />
