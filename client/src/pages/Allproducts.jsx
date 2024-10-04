@@ -24,19 +24,19 @@ const Allproducts = () => {
   const [cartItems, setCartItems] = useState([]);
   const [notif, setNotif] = useState(true);
   const [loadProd, setLoadProd] = useState([]);
-  const [loading, setLoading] = useState({}); 
-  const [loadScreenState, setLoadScreenState] = useState(true); 
+  const [loading, setLoading] = useState({});
+  const [loadScreenState, setLoadScreenState] = useState(true);
 
 
 
   let urlQuery;
-  if(filterCategory){
-console.log('new1');
+  if (filterCategory) {
+    console.log('new1');
 
-urlQuery = `/products?page=${page}&limit=${limit}&sortField=createdAt&sortOrder=desc&category=${filterCategory}`;
-}else{
+    urlQuery = `/products?page=${page}&limit=${limit}&sortField=createdAt&sortOrder=desc&category=${filterCategory}`;
+  } else {
     console.log('new2');
-    
+
     urlQuery = `/products?page=${page}&limit=${limit}&sortField=createdAt&sortOrder=desc`;
   }
 
@@ -164,7 +164,7 @@ urlQuery = `/products?page=${page}&limit=${limit}&sortField=createdAt&sortOrder=
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(prev => ({ ...prev, [proId]: false })); 
+        setLoading(prev => ({ ...prev, [proId]: false }));
         await fetchCart();
       }
     }
@@ -297,92 +297,92 @@ urlQuery = `/products?page=${page}&limit=${limit}&sortField=createdAt&sortOrder=
 
 
     <>
-       <MiddleNav notification={notif} />
-{
-  loadScreenState ? (
-    <LoadingScreen/>
-  )  : (
-    <section className="products-section py-5">
-    <Container>
-      <motion.h2 
-        className="section-title"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Our Products
-      </motion.h2>
-      <Row>
-      {products?.map((item, index) => (
-        <Col key={item?._id} md={4} className="mb-4">
-          <motion.div 
-            className="product-card"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-          >
-            <Link to={`/product/${item._id}`} className="product-link">
-              <div className="product-image">
-                <img src={`${import.meta.env.VITE_API_BASE_URL_LOCALHOST}/uploads/${item?.image[0]}`} alt={item?.name} className="img-fluid" />
+      <MiddleNav notification={notif} />
+      {
+        loadScreenState ? (
+          <LoadingScreen />
+        ) : (
+          <section className="products-section py-5">
+            <Container>
+              <motion.h2
+                className="section-title"
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                Our Products
+              </motion.h2>
+              <Row>
+                {products?.map((item, index) => (
+                  <Col key={item?._id} md={4} className="mb-4">
+                    <motion.div
+                      className="product-card"
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <Link to={`/product/${item._id}`} className="product-link">
+                        <div className="product-image">
+                          <img src={`${import.meta.env.VITE_API_BASE_URL_LOCALHOST}/uploads/${item?.image[0]}`} alt={item?.name} className="img-fluid" />
+                        </div>
+                        <div className="product-info">
+                          <h3 className="product-title">{item?.name}</h3>
+                          <div className="price-info">
+                            <span className="current-price">₹{item?.sale_rate}</span>
+                            <span className="original-price">₹{item?.price}</span>
+                            <span className="discount-badge">{item?.discount}% off</span>
+                          </div>
+                          <p className="product-quantity"> {truncateText(item?.subheading, 20)} </p>
+                        </div>
+                      </Link>
+                      <div className="product-actions">
+                        {
+                          !isInWishlist(item?._id) ? <button className="btn btn-outline-success btn-sm" onClick={() => addWishlist(item?._id)}>
+                            <i className="fa-solid fa-heart"></i>
+                          </button> :
+                            <button className="btn btn-outline-danger btn-sm" onClick={() => removeWishlist(item?._id)}>
+                              <i className="fa-solid fa-heart"></i>
+                            </button>
+
+                        }
+
+                        {
+                          !isInCart(item?._id) ? (
+
+                            <button className="btn btn-success btn-sm" onClick={() => addCart(item?._id)} disabled={loading[item?._id]}>
+                              {loading[item?._id] ? (
+                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              ) : (
+                                <>
+                                  <i className="fas fa-shopping-cart"></i> Add to Cart
+                                </>
+                              )}
+                            </button>
+                          ) :
+                            (<button className="btn btn-warning btn-sm" onClick={() => navigate('/cart')}>
+                              <i className="fas fa-shopping-cart"></i> Go to Cart
+                            </button>)
+                        }
+
+
+
+
+                      </div>
+                    </motion.div>
+                  </Col>
+                ))}
+              </Row>
+              <div className='text-center mt-4 p-5'>
+                {!loadProd.length <= 0 && <button className='btn btn-success' onClick={onLoad}>Load More</button>}
               </div>
-              <div className="product-info">
-                <h3 className="product-title">{item?.name}</h3>
-                <div className="price-info">
-                  <span className="current-price">₹{item?.sale_rate}</span>
-                  <span className="original-price">₹{item?.price}</span>
-                  <span className="discount-badge">{item?.discount}% off</span>
-                </div>
-                <p className="product-quantity"> {truncateText(item?.subheading, 20)} </p>
-              </div>
-            </Link>
-            <div className="product-actions">
-              {
-! isInWishlist(item?._id) ?  <button className="btn btn-outline-success btn-sm"  onClick={ ()=> addWishlist(item?._id)}>
-<i className="fa-solid fa-heart"></i>
-</button>   :
-<button className="btn btn-outline-danger btn-sm" onClick={()=> removeWishlist(item?._id)}>
-<i className="fa-solid fa-heart"></i>
-</button>
-
-              }
-             
-             {
-               ! isInCart(item?._id)?  (
-          
-            <button className="btn btn-success btn-sm" onClick={() => addCart(item?._id)} disabled={loading[item?._id]}>
-                  {loading[item?._id] ? (
-                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  ) : (
-                    <>
-                      <i className="fas fa-shopping-cart"></i> Add to Cart
-                    </>
-                  )}
-                </button>
-            ) :
-        (    <button className="btn btn-warning btn-sm" onClick={()=> navigate('/cart')}>
-            <i className="fas fa-shopping-cart"></i> Go to Cart
-          </button> )
-             }
+            </Container>
+          </section>
+        )
+      }
 
 
-              
-
-             </div>
-           </motion.div>
-         </Col>
-      ))}
-    </Row>
-    <div className='text-center mt-4 p-5'>
-        {!loadProd.length <=0 &&  <button className='btn btn-success' onClick={onLoad}>Load More</button>}
-        </div>
-    </Container>
-  </section>
-  )
-}
-
-     
-       <Footer />
-     </>
+      <Footer />
+    </>
   );
 };
 

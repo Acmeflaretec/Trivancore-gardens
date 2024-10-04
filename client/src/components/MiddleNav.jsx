@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axiosInstance from '../axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserDetails, clearUserDetails } from '../redux/actions/userActions';
@@ -9,15 +9,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './MiddleNav.css'; // Custom styles
 
-function MiddleNav({notification}) {
+function MiddleNav({ notification }) {
   const cartItemCount = 3;
   const wishlistItemCount = 2;
   const [isLoggedIn, setIsLoggedIn] = useState(true); // Simulate a logged-in user
   const dispatch = useDispatch();
   const userDetails = useSelector(state => state?.userDetails);
   const navigate = useNavigate();
-  const [wishListData,setWishListData] = useState()
-  const [cartData,setCartData] = useState([])
+  const [wishListData, setWishListData] = useState()
+  const [cartData, setCartData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,52 +32,52 @@ function MiddleNav({notification}) {
     fetchData();
   }, []);
 
-let urlQuery = '';
+  let urlQuery = '';
 
-useEffect(()=>{
+  useEffect(() => {
 
-  urlQuery=`/user/getcarts`
+    urlQuery = `/user/getcarts`
 
-  const fetchData = async()=>{
+    const fetchData = async () => {
 
-    try {
+      try {
 
-      const response = await axiosInstance.get(urlQuery);
-      setCartData(response?.data?.data?.item?.length)
+        const response = await axiosInstance.get(urlQuery);
+        setCartData(response?.data?.data?.item?.length)
 
-    }catch(error){
-      
+      } catch (error) {
+
+      }
     }
-  }
 
-  fetchData()
-    },[notification])
+    fetchData()
+  }, [notification])
 
-  useEffect(()=>{
- 
-    
- 
-     const fetchData = async()=>{
- 
-       try {
- 
-         const response = await axiosInstance.get(`/user/getwishlist`);
-         setWishListData(response?.data?.data?.length)
-      
-         
-       } catch (error) {
-         console.log(error)
-       }
- 
-     }
- 
- 
-     fetchData()
- 
- 
-   },[notification])
+  useEffect(() => {
 
-  
+
+
+    const fetchData = async () => {
+
+      try {
+
+        const response = await axiosInstance.get(`/user/getwishlist`);
+        setWishListData(response?.data?.data?.length)
+
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
+
+    fetchData()
+
+
+  }, [notification])
+
+
 
   const logoutUser = () => {
     // Dispatch the clearUserDetails action to log out the user
@@ -90,7 +90,7 @@ useEffect(()=>{
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    
+
   };
 
   return (
@@ -102,16 +102,16 @@ useEffect(()=>{
         </Link>
 
         <div className="nav-actions mobile-action">
-            <Link to={userDetails? '/cart' :'/login'} className="nav-icon-link" title="Cart">
-              <i className="fas fa-shopping-cart"></i>
-              { cartData > 0 && <span className="badge">{cartData}</span>}
-            </Link>
-            <Link to={userDetails? '/wishlist' :'/login'} className="nav-icon-link" title="Wishlist">
-              <i className="fas fa-heart"></i>
-              {wishListData > 0 && <span className="badge">{wishListData}</span>}
-            </Link>
-          
-          </div>
+          <Link to={userDetails ? '/cart' : '/login'} className="nav-icon-link" title="Cart">
+            <i className="fas fa-shopping-cart"></i>
+            {cartData > 0 && <span className="badge">{cartData}</span>}
+          </Link>
+          <Link to={userDetails ? '/wishlist' : '/login'} className="nav-icon-link" title="Wishlist">
+            <i className="fas fa-heart"></i>
+            {wishListData > 0 && <span className="badge">{wishListData}</span>}
+          </Link>
+
+        </div>
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -130,30 +130,30 @@ useEffect(()=>{
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
-            <li><Link className=" nav-link mobile-action" to={userDetails? '/profile' :'/login'}> {userDetails ? 'Profile': 'Login'} </Link></li>
-{
-userDetails &&  <li><button className="mobile-action" onClick={logoutUser} 
-style={{
-  backgroundColor: '#4CAF50',
-  color: 'white',
-  padding: '10px 20px',
-  borderRadius: '5px',
-  border: 'none',
-  cursor: 'pointer',
-  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
-  fontWeight: 'bold',
-}}
->Logout</button></li>
+            <li><Link className=" nav-link mobile-action" to={userDetails ? '/profile' : '/login'}> {userDetails ? 'Profile' : 'Login'} </Link></li>
+            {
+              userDetails && <li><button className="mobile-action" onClick={logoutUser}
+                style={{
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '5px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+                  fontWeight: 'bold',
+                }}
+              >Logout</button></li>
 
-}
+            }
 
           </ul>
           <div className="nav-actions pc-action">
-            <Link to={userDetails? '/cart' :'/login'} className="nav-icon-link" title="Cart">
+            <Link to={userDetails ? '/cart' : '/login'} className="nav-icon-link" title="Cart">
               <i className="fas fa-shopping-cart"></i>
-              { cartData > 0 && <span className="badge">{cartData}</span>}
+              {cartData > 0 && <span className="badge">{cartData}</span>}
             </Link>
-            <Link to={userDetails? '/wishlist' :'/login'} className="nav-icon-link" title="Wishlist">
+            <Link to={userDetails ? '/wishlist' : '/login'} className="nav-icon-link" title="Wishlist">
               <i className="fas fa-heart"></i>
               {wishListData > 0 && <span className="badge">{wishListData}</span>}
             </Link>
@@ -163,7 +163,7 @@ style={{
                   <i className="fas fa-user text-white"></i>
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                  <li><Link className="dropdown-item" to={userDetails? '/profile' :'/login'}>Profile</Link></li>
+                  <li><Link className="dropdown-item" to={userDetails ? '/profile' : '/login'}>Profile</Link></li>
                   <li><button className="dropdown-item" onClick={logoutUser}  >Logout</button></li>
                 </ul>
               </div>
