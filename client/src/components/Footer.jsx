@@ -34,9 +34,9 @@ function Footer() {
             <ul className="footer-links">
             <li><Link to={'/privacypolicy'}>Privacy Policy</Link></li>
               <li><Link to={'/cancellation'}>Cancellation & Refunds</Link></li>
-              <li><Link to={'/returnpolicy'}>Return Policy</Link></li>
-              <li><Link to={'/storepolicy'}>Store Policies</Link></li>
-              <li><Link to={'/termsofservice'}>Terms of Service</Link></li>
+              {/* <li><Link to={'/returnpolicy'}>Return Policy</Link></li> */}
+              <li><Link to={'/storepolicy'}>Shipping and Delivery</Link></li>
+              <li><Link to={'/termsofservice'}>Terms and Conditions</Link></li>
             </ul>
           </Col>
           <Col lg={3} md={6} className="footer-section">

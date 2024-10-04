@@ -9,42 +9,36 @@ function TermsOfService() {
       <div className="container my-5">
         <div className="row">
           <div className="col">
-            <h1 className="mb-4">Terms of Service</h1>
-
-            <h2 className="mt-4"><strong>USER AGREEMENT</strong></h2>
+            <h1 className="mb-4">Terms and conditions</h1>
             <p>
-              By accessing the KGECO website, you agree to the accompanying terms and conditions. Any orders and purchases made through this site are governed by these terms. We reserve the right to modify these terms and conditions without notice at any time.
+              For the purpose of these Terms and Conditions, The term "we", "us", "our" used anywhere on this page shall mean ANJANA KRISHNAPANICKER VALSALA, whose registered/operational office is Pallivila puthen veedu ambalathinkala po kattakada Thiruvananthapuram KERALA 695572 . "you", “your”, "user", “visitor” shall mean any natural or legal person who is visiting our website and/or agreed to purchase from us.
             </p>
 
-            <h2 className="mt-4"><strong>GOVERNING LAWS</strong></h2>
+            <h5 className="mt-4"><strong>Your use of the website and/or purchase from us are governed by following Terms and Conditions:
+            </strong></h5>
+            <h6>The content of the pages of this website is subject to change without notice.
+            </h6>
             <p>
-              This website is governed by the laws and courts of the state of Kerala. Orders placed on this site and the use of this site must comply with applicable provincial and national laws. It is the user’s responsibility to adhere to these laws.
+              Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
             </p>
+            <p>
 
-            <h2 className="mt-4"><strong>WEBSITE ERRORS</strong></h2>
-            <p>
-              We reserve the right to correct any errors or inaccuracies and update information on this website at any time without notice. This includes price and item availability.
+              Your use of any information or materials on our website and/or product pages is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through our website and/or product pages meet your specific requirements.
             </p>
-
-            <h2 className="mt-4"><strong>SHIPPING</strong></h2>
-            <p>
-              All items are delivered by a third party, and delivery is governed by the third party’s shipping contracts. While we strive to deliver items as quickly as possible, we are not responsible for delivery delays beyond our control. We reserve the right to hold shipments to certain addresses or cancel orders at our discretion.
+            <p>Our website contains material which is owned by or licensed to us. This material includes, but are not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+            All items are delivered by a third party, and delivery is governed by the third party’s shipping contracts. While we strive to deliver items as quickly as possible, we are not responsible for delivery delays beyond our control. We reserve the right to hold shipments to certain addresses or cancel orders at our discretion.
             </p>
-
-            <h2 className="mt-4"><strong>LINKS</strong></h2>
-            <p>
-              This site may provide links to other websites. These linked websites are independent of KGECO. We have no control over, and hold no liability for, the content or use of these sites. Accessing other websites through links on this site is done at the user’s own risk.
+            <p>All trademarks reproduced in our website which are not the property of, or licensed to, the operator are acknowledged on the website.
             </p>
-
-            <h2 className="mt-4"><strong>COPYRIGHT CONSIDERATION</strong></h2>
-            <p>
-              All textual and graphic content on this site, its organization, presentation, and domain name are the property of, and/or licensed by, KGECO. Materials on this site may not be copied, reproduced, posted, or republished in any way. Republication or use of these materials on any other website is prohibited. All copyright logos and service marks displayed on this site are registered and their use is prohibited.
+            <p>Unauthorized use of information provided by us shall give rise to a claim for damages and/or be a criminal offense.
             </p>
-
-            <h2 className="mt-4"><strong>LIABILITY DISCLAIMER</strong></h2>
-            <p>
-              This website should be used with discretion. Although we make reasonable efforts to ensure the website is current and free from inaccuracies or errors, we cannot guarantee that these will not occur. We will correct any mistakes as soon as possible and make reasonable efforts to notify affected users. This may result in orders not yet shipped being canceled or postponed. This agreement supersedes any prior agreements or understandings related to this subject matter. KGECO and its owners and employees are not liable for any damages arising from the use or access to our site or linked sites, whether these damages are foreseeable or not and regardless of whether we have been advised of the possibility, including, but not limited to, direct, indirect, special, consequential, incidental, or punitive damages.
+            <p>From time to time our website may also include links to other websites. These links are provided for your convenience to provide further information.
             </p>
+            <p>You may not create a link to our website from another website or document without ANJANA KRISHNAPANICKER VALSALA’s prior written consent.
+            </p>
+            <p>Any dispute arising out of use of our website and/or purchase with us and/or any engagement with us is subject to the laws of India .
+            </p>
+            <p>We, shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any Transaction, on Account of the Cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time</p>
           </div>
         </div>
       </div>
