@@ -57,9 +57,16 @@ const useDeleteCategorys = () => {
   });
 };
 
-const useGetProducts = (data) => {
-  return useQuery(["get_products", data], () => getProducts(data), {
-    // staleTime: 30000,
+// const useGetProducts = (data) => {
+//   return useQuery(["get_products", data], () => getProducts(data), {
+//     // staleTime: 30000,
+//     keepPreviousData: true,
+//     refetchOnWindowFocus: false,
+//   });
+// };
+
+const useGetProducts = (params) => {
+  return useQuery(["get_products", params], () => getProducts(params), {
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
