@@ -8,8 +8,22 @@ const addProduct = async (data) => request(`/products`, 'POST', data)
 const updateProduct = async (data) => request(`/products`, 'PATCH', data)
 const deleteProduct = async (data) => request(`/products/${data?._id}`, 'DELETE', data)
 const getCategory = async (data) => request(`/category?page=${data?.pageNo}&perpageitems=${data?.pageCount}`, 'GET', data)
-const getProducts = async (data) => request(`/products/admin?page=${data?.pageNo}&perpageitems=${data?.pageCount}`, 'GET', data)
+// const getProducts = async (data) => request(`/products/admin?page=${data?.pageNo}&perpageitems=${data?.pageCount}`, 'GET', data)
 const getProductById = async (data) => request(`/products/${data?.id}`, 'GET', data)
+
+
+const getProducts = async ({ page, perPage, sortBy, order, search }) => {
+  const queryParams = new URLSearchParams({
+    page,
+    perPage,
+    sortBy,
+    order,
+    search,
+  }).toString();
+
+  const response = await request(`/products/adminProducts?${queryParams}`, 'GET');
+  return response;
+};
 
 export {
   addCategory,
