@@ -42,9 +42,10 @@ function Footer() {
           <Col lg={3} md={6} className="footer-section">
             <h5 className="footer-title">Contact Us</h5>
             <ul className="footer-contact">
-              <li><i className="fas fa-phone"></i> +91 123456789</li>
-              <li><i className="fas fa-envelope"></i> example@gmail.com</li>
-              <li><i className="fas fa-map-marker-alt"></i>trivandrum</li>
+              <li><i className="fas fa-phone"></i>+918078315506</li>
+              <li><i className="fas fa-envelope"></i>anjanakrishnaa112@gmail.com</li>
+              <li><i className="fas fa-map-marker-alt"></i>Pallivila puthen Veedu ambalathinkala po Kattakkada 
+695572</li>
             </ul>
           </Col>
         </Row>
