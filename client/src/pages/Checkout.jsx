@@ -44,7 +44,7 @@ const Checkout = () => {
         const response = await axios.get(`https://api.postalpincode.in/pincode/${selectedAddressPin}`);
         // console.log('state responce', response?.data[0]?.PostOffice[0].State);
 
-        const stateFromApi = response?.data[0]?.PostOffice[0]?.State; 
+        const stateFromApi = response?.data[0]?.PostOffice[0]?.State;
         setState(stateFromApi);
       } catch (error) {
         console.error('Error fetching state:', error);
@@ -205,7 +205,7 @@ const Checkout = () => {
       // Calculate the total sale price
       const totalSalePrice = calculateTotalSalePrice(updatedFilteredCartItems);
       setSalePriceTotal(totalSalePrice);
-      
+
       // const totalupdateQuantity = calculateTotalSalePrice(updatedFilteredCartItems);
       // setSalePriceTotal(totalupdateQuantity);
       const totalProQuantity = calculateTotalquantity(updatedFilteredCartItems);
@@ -406,16 +406,16 @@ const Checkout = () => {
     // const totalAmountToPay = salePriceTotal < 299
     //   ? salePriceTotal + deliveryCharge
     //   : salePriceTotal;
-    const totalAmountToPay =  salePriceTotal + deliveryCharge
+    const totalAmountToPay = salePriceTotal + deliveryCharge
 
     if (paymentOption === "cod") {
       handlePaymentSuccess();
     } else if (paymentOption === "razorpay") {
       const options = {
-        key: "rzp_test_wNhVz81BFxrIrL",
-        amount: parseInt(totalAmountToPay) * 100, // amount in paisa
+        key: import.meta.env.VITE_API_RAZORPAY,
+        amount: parseInt(totalAmountToPay) * 100,
         currency: "INR",
-        name: "KGECO",
+        name: " TRAVANCORE GARDENS",
         description: "Purchase course",
         handler: function (response) {
           handlePaymentSuccess();
@@ -423,7 +423,7 @@ const Checkout = () => {
         theme: {
           color: "#008000",
         },
-        image: "logo.png",
+        image: "travancore-logo.jpg",
       };
 
       const rzp = new window.Razorpay(options);
@@ -480,7 +480,7 @@ const Checkout = () => {
       setAddressDatas([]);
 
       await fetchAddress("/address");
-      
+
     } catch (error) {
       console.error("Error submitting address: ", error);
     }
@@ -492,17 +492,17 @@ const Checkout = () => {
 
   const handileDaliweryCharge = () => {
     // setSelectedAddressPin(orderAddress.zip)
-    if(state){
+    if (state) {
 
       setCurrentStep(2);
-    }else{
+    } else {
       alert('this location product not deliverd. please add another pincode')
     }
   }
 
-  
-  console.log('delivery charge is:-',deliveryCharge);
-  
+
+  console.log('delivery charge is:-', deliveryCharge);
+
   return (
     <>
       {loadScreenState ? (
@@ -512,13 +512,9 @@ const Checkout = () => {
           <header className="bg-white shadow-sm">
             <div className="container py-3">
               <div className="d-flex justify-content-between align-items-center">
-                <Link to="/" className="text-decoration-none">
-                  <img
-                    src="logo.png"
-                    className="img-fluid"
-                    width={120}
-                    alt="Logo"
-                  />
+                <Link className="navbar-brand" to="/">
+                  {/* <img src="logo.png" className="logo" alt="Logo" /> */}
+                  <h5 className="logo-text fw-bold text-success">Travancore gardens</h5>
                 </Link>
 
                 <div className="text-success">
@@ -816,7 +812,7 @@ const Checkout = () => {
                       <span>Subtotal:</span>
                       <span>₹{proPriceTotal}</span>
                     </div>
-                    
+
                     <div className="d-flex justify-content-between mb-2">
                       <span>Total Discount:</span>
                       <span>-₹{proPriceTotal - salePriceTotal}</span>
@@ -831,7 +827,7 @@ const Checkout = () => {
                           <span className="text-success ms-2"> Free Delivery</span>
                         </span>
                       ) : ( */}
-                        <span>₹{deliveryCharge}</span>
+                      <span>₹{deliveryCharge}</span>
                       {/* )} */}
                     </div>
                     <hr />
@@ -841,8 +837,8 @@ const Checkout = () => {
                         ₹
                         {/* {salePriceTotal < 299
                           ?  */}
-                          {salePriceTotal + deliveryCharge}
-                          {/* : salePriceTotal} */}
+                        {salePriceTotal + deliveryCharge}
+                        {/* : salePriceTotal} */}
                       </span>
                     </div>
                   </div>
