@@ -11,7 +11,7 @@ function PrivacyPolicy() {
           <div className="col">
             <h1 className="mb-4">Privacy Policy</h1>
             <p>
-              At Travancore Gardens, we are committed to protecting your privacy and ensuring that your personal information is handled securely and responsibly. This Privacy Policy outlines how we collect, use, and safeguard your data when you interact with our website and services.
+              At Agroman Store, we are committed to protecting your privacy and ensuring that your personal information is handled securely and responsibly. This Privacy Policy outlines how we collect, use, and safeguard your data when you interact with our website and services.
             </p>
 
             <h2 className="mt-5">Information We Collect</h2>
