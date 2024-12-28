@@ -16,7 +16,7 @@ import brand from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+// import Footer from "examples/Footer";
 import "assets/css/nucleo-icons.css";
 import "assets/css/nucleo-svg.css";
 import "assets/css/style.css";
@@ -121,7 +121,7 @@ export default function App() {
 
                 <Route path="*" element={<Navigate to="/category" />} />
               </Routes>
-              <Footer />
+              {/* <Footer /> */}
             </DashboardLayout>
           </>}
       </ThemeProvider>
@@ -158,7 +158,7 @@ export default function App() {
               {/* <Route path="/blogs/editBlog/:id" element={<EditBlog />} /> */}
               <Route path="*" element={<Navigate to="/category" />} />
             </Routes>
-            <Footer />
+            {/* <Footer /> */}
           </DashboardLayout>
         </>
       }
