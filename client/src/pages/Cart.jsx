@@ -329,8 +329,9 @@ function Cart() {
                   </Link> */}
 
 
-                      <button className="btn btn-success btn-lg w-100 mt-4" onClick={() => navigate('/checkout')}
-                        disabled={salePriceTotal < 80} >{salePriceTotal < 80 ? 'Add above ₹80 to continue' : 'Proceed to Checkout'}
+                      <button className="btn btn-success btn-lg w-100 mt-4" onClick={() => navigate('/checkout')}>
+                        {/* // disabled={salePriceTotal < 80} >{salePriceTotal < 80 ? 'Add above ₹80 to continue' : 'Proceed to Checkout'} */}
+                        Proceed to Checkout
                       </button>
                     </div>
                   </div>
