@@ -361,6 +361,9 @@ const Checkout = () => {
     };
   }, []);
 
+
+
+  const totalAmountToPay = salePriceTotal + deliveryCharge
   const handlePaymentSuccess = async () => {
     const orderFormat = {};
 
@@ -386,9 +389,11 @@ const Checkout = () => {
 
     const response = await axiosInstance.post(`/orders`, {
       payment_mode: paymentOption,
-      amount: productsOrderData?.totalPrice,
+      // amount: productsOrderData?.totalPrice,
+      amount: totalAmountToPay,
       address: orderAddress,
       products: productsOrderData,
+      deliveryCharge:deliveryCharge,
     });
 
     Swal.fire({
@@ -401,12 +406,12 @@ const Checkout = () => {
     navigate("/order");
   };
 
+  
   const placeOrder = async () => {
 
     // const totalAmountToPay = salePriceTotal < 299
     //   ? salePriceTotal + deliveryCharge
     //   : salePriceTotal;
-    const totalAmountToPay = salePriceTotal + deliveryCharge
 
     if (paymentOption === "cod") {
       handlePaymentSuccess();

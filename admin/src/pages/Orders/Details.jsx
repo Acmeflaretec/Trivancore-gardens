@@ -16,7 +16,7 @@ const Details = ({ data }) => {
                 <Typography fontSize={14}>{data?.address?.city}, {data?.address?.state}</Typography>
                 <Typography fontSize={14}>{data?.address?.country} {data?.address?.zip}</Typography>
                 <Typography fontSize={14}>Phone : {data?.address?.mobile}</Typography>
-                <Typography fontSize={14}>Email : {data?.email}</Typography>
+                {/* <Typography fontSize={14}>Email : {data?.email}</Typography> */}
             </Grid>
 
             <Grid item xs={12}>
@@ -35,11 +35,11 @@ const Details = ({ data }) => {
             </Stack>
             <Stack direction={'row'} justifyContent={'space-between'}>
                 <Typography fontSize={14}>Order Subtotal</Typography>
-                <Typography fontSize={14}>₹ {data?.amount}/-</Typography>
+                <Typography fontSize={14}>₹ {data?.deliveryCharge? (data?.amount-data?.deliveryCharge) : data?.amount}/-</Typography>
             </Stack>
             <Stack direction={'row'} justifyContent={'space-between'}>
                 <Typography fontSize={14}>Shipping charges</Typography>
-                <Typography fontSize={14}>Free</Typography>
+                <Typography fontSize={14}>{data?.deliveryCharge ? data?.deliveryCharge : 'Free'}</Typography>
             </Stack>
             <Stack direction={'row'} justifyContent={'space-between'}>
                 <Typography fontSize={14}>Tax</Typography>

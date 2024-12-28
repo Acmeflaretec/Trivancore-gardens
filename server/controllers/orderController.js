@@ -58,11 +58,11 @@ const getOrderById = async (req, res) => {
 const createOrder = async (req, res) => {
   const { _id } = req?.decoded
 
-  const {  payment_mode, amount, address, products } = req?.body
+  const {  payment_mode, amount, address, products,deliveryCharge } = req?.body
 
   console.log('addrr',address)
   try {
-    const data = await Order.create({ userId:_id, payment_mode, amount, address, products })
+    const data = await Order.create({ userId:_id, payment_mode, amount, address, products,deliveryCharge })
     console.log('prod qty findings ',products.item)
 
 // Remove cart items from the user after order creation
@@ -71,7 +71,7 @@ user.cart.item = []; // Clear the cart items
 user.cart.totalPrice = 0; // Reset total price to zero
 await user.save(); // Save the user with cleared cart
 
-for (const item of products.item) {
+for (const item of products.item) {    
   const product = await Product.findById(item.product_id);
 
   if (product) {
