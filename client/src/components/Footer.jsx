@@ -15,9 +15,9 @@ function Footer() {
               At Travancore Gardens, we're passionate about helping you create beautiful, sustainable gardens. We offer eco-friendly gardening products and tools to support your gardening journey.
             </p>
             <div className="social-icons">
-              <a href="https://www.facebook.com/profile.php?id=61561366147522&mibextid=LQQJ4d" target="_blank" className="social-icon"><FaFacebookF /></a>
-              <a href="https://www.instagram.com/kg.ecoproducts?igsh=ejU0OXp4ZTFrMGVp&utm_source=qr" target="_blank" className="social-icon"><FaInstagram /></a>
-              <a href="https://www.linkedin.com/company/kgecoproducts/" target="_blank" className="social-icon"><FaLinkedinIn /></a>
+              <a className="social-icon"><FaFacebookF /></a>
+              <a className="social-icon"><FaInstagram /></a>
+              <a className="social-icon"><FaLinkedinIn /></a>
             </div>
           </Col>
           <Col lg={2} md={6} className="footer-section">
