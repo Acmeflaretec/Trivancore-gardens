@@ -12,7 +12,7 @@ const About = () => {
           <Row className="justify-content-center align-items-center">
             <Col lg={6} className="mb-4 mb-lg-0">
               <Image
-                src="who.jpg"
+                src=""
                 alt="About"
                 fluid
                 rounded

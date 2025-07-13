@@ -12,7 +12,7 @@ function Footer() {
           <Col lg={4} md={6} className="footer-section">
             <h5 className="footer-title">About Us</h5>
             <p className="footer-description">
-              We are committed to providing eco-friendly products that promote sustainability and environmental responsibility.
+              At Travancore Gardens, we're passionate about helping you create beautiful, sustainable gardens. We offer eco-friendly gardening products and tools to support your gardening journey.
             </p>
             <div className="social-icons">
               <a href="https://www.facebook.com/profile.php?id=61561366147522&mibextid=LQQJ4d" target="_blank" className="social-icon"><FaFacebookF /></a>
@@ -34,7 +34,6 @@ function Footer() {
             <ul className="footer-links">
             <li><Link to={'/privacypolicy'}>Privacy Policy</Link></li>
               <li><Link to={'/cancellation'}>Cancellation & Refunds</Link></li>
-              {/* <li><Link to={'/returnpolicy'}>Return Policy</Link></li> */}
               <li><Link to={'/storepolicy'}>Shipping and Delivery</Link></li>
               <li><Link to={'/termsofservice'}>Terms and Conditions</Link></li>
             </ul>
@@ -42,10 +41,7 @@ function Footer() {
           <Col lg={3} md={6} className="footer-section">
             <h5 className="footer-title">Contact Us</h5>
             <ul className="footer-contact">
-              <li><i className="fas fa-phone"></i>+918078315506</li>
-              <li><i className="fas fa-envelope"></i>anjanakrishnaa112@gmail.com</li>
-              <li><i className="fas fa-map-marker-alt"></i>Pallivila puthen Veedu ambalathinkala po Kattakkada 
-695572</li>
+              <li><i className="fas fa-envelope"></i>travancoregardens@gmail.com</li>
             </ul>
           </Col>
         </Row>
@@ -54,7 +50,7 @@ function Footer() {
         <Container>
           <Row className="align-items-center">
             <Col md={6} className="text-center text-md-start">
-              <p className="mb-0">&copy; {new Date().getFullYear()} Travancore gardens. All rights reserved.</p>
+              <p className="mb-0">&copy; {new Date().getFullYear()} Travancore Gardens. All rights reserved.</p>
             </Col>
             <Col md={6} className="text-center text-md-end">
               <p className="mb-0">Designed by <a href="https://www.acmeflare.in/" className="designer-link">Acmeflare</a></p>

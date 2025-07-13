@@ -45,11 +45,7 @@ const ContactUs = () => {
                 <Col md={6} className="mb-4">
                   <div className="contact-info">
                     <h3 className="fw-bold">Contact Details</h3>
-                    {/* <p>123 Street Name</p> */}
-                    <p>Pallivila puthen Veedu ambalathinkala po Kattakkada 
-695572</p>
-                    <p>Email: anjanakrishnaa112@gmail.com</p>
-                    <p>Phone: +918078315506 </p>
+                    <p>Email: travancoregardens@gmail.com</p>
                   </div>
                 </Col>
                 <Col md={6}>
